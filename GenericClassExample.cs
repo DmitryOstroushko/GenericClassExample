@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace GenericClassExample
 {
-    public class GenericClassExample<T> where T : class
+    public class GenericClassExample<T> where T : struct
     {
         private ICollection<T> _collection;
 
@@ -18,11 +18,11 @@ namespace GenericClassExample
             {
                 return _collection.ElementAt(number);
             }
-            return null;
+            return default(T);
         }
 
         public ICollection<T> GetOrderedCollection() {
-            return _collection.OrderByDescending(r => r.GetHashCode());
+            return (ICollection<T>)_collection.OrderByDescending(r => r.GetHashCode());
         }
     }
 }
